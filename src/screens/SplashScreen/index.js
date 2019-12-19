@@ -8,9 +8,7 @@ import {getPosts} from '../../services/blogService';
 function SplashScreen({navigation}) {
   useEffect(() => {
     getPosts()
-      .then(() => {
-        navigation.push('blog');
-      })
+      .then(navigation.replace('blog'))
       .catch(err => {
         console.log(err);
       });

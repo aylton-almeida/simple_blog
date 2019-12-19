@@ -21,11 +21,23 @@ export async function getPosts() {
         item =>
           (item.authorName = list.find(user => user.id === item.userId).name),
       );
-      console.log(postList[0]);
       store.dispatch({type: SET_POSTS_LIST, payload: postList});
     });
 }
 
+/**
+ * Get post comments list
+ * @param {Number} id Post id
+ * @return {Promise<Array>}
+ */
+export async function getComments(id) {
+  return fetch(`${blogPosts}/${id}/comments`).then(response => response.json());
+}
+
+/**
+ * Get user list
+ * @return {Promise<any>}
+ */
 export async function getUsers() {
   return fetch(userList).then(response => response.json());
 }

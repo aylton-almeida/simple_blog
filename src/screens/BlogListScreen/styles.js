@@ -8,6 +8,7 @@ export default StyleSheet.create({
   },
   tileText: {
     fontSize: 18,
+    fontWeight: '700',
   },
   tileAuthor: {
     marginTop: 5,

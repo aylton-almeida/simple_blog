@@ -27,7 +27,9 @@ function BlogListScreen({navigation, postList}) {
     getPosts().then(setRefreshing(false));
   }, []);
 
-  function onTilePress(item) {}
+  function onTilePress(item) {
+    navigation.push('post', {'@post': item});
+  }
 
   return (
     <FlatList
