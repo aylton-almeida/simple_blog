@@ -1,28 +1,28 @@
-import React from 'react';
-import {View, Text, StatusBar} from 'react-native';
+import React, {useEffect} from 'react';
+import {View, Text} from 'react-native';
 import styles from './styles';
 import * as Progress from 'react-native-progress';
 import {theme} from '../../styles/theme';
-
-export function navigationOptions() {
-  return {
-    header: null,
-  };
-}
+import {getPosts} from '../../services/blogService';
 
 function SplashScreen({navigation}) {
+  useEffect(() => {
+    getPosts()
+      .then(navigation.replace('blog'))
+      .catch(err => {
+        console.log(err);
+      });
+  }, [navigation]);
+
   return (
-    <>
-      <StatusBar backgroundColor={theme.colors.primary} />
-      <View style={styles.root}>
-        <Text style={styles.text}>Loading Blog...</Text>
-        <Progress.CircleSnail
-          size={60}
-          indeterminate={true}
-          color={theme.colors.accent}
-        />
-      </View>
-    </>
+    <View style={styles.root}>
+      <Text style={styles.text}>Loading Blog...</Text>
+      <Progress.CircleSnail
+        size={60}
+        indeterminate={true}
+        color={theme.colors.accent}
+      />
+    </View>
   );
 }
 
